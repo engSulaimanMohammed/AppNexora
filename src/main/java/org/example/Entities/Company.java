@@ -13,6 +13,9 @@ public class Company {
     public Company(Long id, String name, String userRole, int employeeCount) {
 
         this.id = id;
+        this.name = name;
+        this.userRole = userRole;
+        this.employeeCount = employeeCount;
 
     }
 }
