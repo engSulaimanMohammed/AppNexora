@@ -8,4 +8,11 @@ public class Company {
     private int employeeCount;
     public Company() {
     }
+
+
+    public Company(Long id, String name, String userRole, int employeeCount) {
+
+        this.id = id;
+
+    }
 }
