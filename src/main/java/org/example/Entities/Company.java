@@ -17,6 +17,7 @@ public class Company {
         this.id = id;
         this.name = name;
         this.userRole = userRole;
+        this.employeeCount = employeeCount;
 
 
     }
