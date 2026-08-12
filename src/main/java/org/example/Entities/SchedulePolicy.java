@@ -32,4 +32,13 @@ public class SchedulePolicy {
     public int getWorkingDays() {
         return workingDays;
     }
+
+    @Override
+    public String toString() {
+        return "Policy: " + name +
+                ", Start: " + startTime +
+                ", End: " + endTime +
+                ", Working Days: " + workingDays;
+    }
 }
+
