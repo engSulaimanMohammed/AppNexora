@@ -17,8 +17,19 @@ public class SchedulePolicy {
     }
 
 
+    public String getName() {
+        return name;
+    }
 
+    public String getStartTime() {
+        return startTime;
+    }
 
+    public String getEndTime() {
+        return endTime;
+    }
 
-
+    public int getWorkingDays() {
+        return workingDays;
+    }
 }
