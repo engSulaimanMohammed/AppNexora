@@ -11,3 +11,5 @@ public class User {
 
     public User(int id, String username, String password, String role) {
         this.id = id;
+        this.username = username;
+        t
