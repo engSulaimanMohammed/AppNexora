@@ -10,3 +10,4 @@ public class User {
     private String role;
 
     public User(int id, String username, String password, String role) {
+        this.id = id;
