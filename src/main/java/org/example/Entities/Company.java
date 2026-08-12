@@ -6,6 +6,8 @@ public class Company {
     private String name;
     private String userRole;
     private int employeeCount;
+
+
     public Company() {
     }
 
@@ -15,7 +17,7 @@ public class Company {
         this.id = id;
         this.name = name;
         this.userRole = userRole;
-        this.employeeCount = employeeCount;
+
 
     }
 }
