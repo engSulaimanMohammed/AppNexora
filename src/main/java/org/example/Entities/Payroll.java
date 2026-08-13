@@ -6,4 +6,6 @@ public class Payroll {
     private Long employeeId;
     private double basicSalary;
     private double bonus;
+    private double deductions;
+
 }
