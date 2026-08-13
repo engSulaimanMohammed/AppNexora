@@ -19,3 +19,4 @@ public class PayrollEmployee {
             double deductions) {
 
         this.payrollId = payrollId;
+        this.employeeId = employeeId;
