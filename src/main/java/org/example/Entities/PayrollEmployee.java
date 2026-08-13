@@ -18,3 +18,4 @@ public class PayrollEmployee {
             double allowances,
             double deductions) {
 
+        this.payrollId = payrollId;
