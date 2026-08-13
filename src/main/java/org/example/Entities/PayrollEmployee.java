@@ -6,3 +6,4 @@ public class PayrollEmployee {
     private int employeeId;
     private String month;
     private double basicSalary;
+    private double allowances;
