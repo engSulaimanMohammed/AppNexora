@@ -1,189 +1,189 @@
-name: Commit Message Check
+# name: Commit Message Check
 
-# ============================================================
-# APPNEXORA COMMIT CONVENTION
-# ============================================================
-#
-# Required format:
-#
-#   type(scope): description
-#
-# Examples:
-#
-#   feat(server): add employee login
-#   fix(web): fix dashboard layout
-#   chore(LM): update machine learning dependencies
-#   docs(server): update API documentation
-#
-# Allowed scopes:
-#
-#   server = Backend
-#   web    = Frontend
-#   LM     = Machine Learning
-#
-# ============================================================
+# # ============================================================
+# # APPNEXORA COMMIT CONVENTION
+# # ============================================================
+# #
+# # Required format:
+# #
+# #   type(scope): description
+# #
+# # Examples:
+# #
+# #   feat(server): add employee login
+# #   fix(web): fix dashboard layout
+# #   chore(LM): update machine learning dependencies
+# #   docs(server): update API documentation
+# #
+# # Allowed scopes:
+# #
+# #   server = Backend
+# #   web    = Frontend
+# #   LM     = Machine Learning
+# #
+# # ============================================================
 
-on:
-  pull_request:
-    branches:
-      - master
-    types:
-      - opened
-      - synchronize
-      - reopened
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#     types:
+#       - opened
+#       - synchronize
+#       - reopened
 
-permissions:
-  contents: read
-  pull-requests: read
+# permissions:
+#   contents: read
+#   pull-requests: read
 
-jobs:
+# jobs:
 
-  commit-check:
-    name: Validate Commit Messages
-    runs-on: ubuntu-latest
+#   commit-check:
+#     name: Validate Commit Messages
+#     runs-on: ubuntu-latest
 
-    steps:
+#     steps:
 
-      # --------------------------------------------------------
-      # Checkout repository
-      # --------------------------------------------------------
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-
-      # --------------------------------------------------------
-      # Check every commit inside the Pull Request
-      # --------------------------------------------------------
-      - name: Validate commit messages
-        shell: bash
-        run: |
-
-          echo "=========================================="
-          echo " AppNexora Commit Message Validator"
-          echo "=========================================="
-          echo ""
-
-          # ----------------------------------------------------
-          # Allowed commit types
-          # ----------------------------------------------------
-          #
-          # feat     = New feature
-          # fix      = Bug fix
-          # chore    = Maintenance
-          # docs     = Documentation
-          # style    = Formatting
-          # refactor = Code restructuring
-          # test     = Tests
-          # perf     = Performance improvement
-          # build    = Build/dependency changes
-          # ci       = CI/CD changes
-          # revert   = Reverting previous changes
-          #
-          # ----------------------------------------------------
-
-          TYPES="feat|fix|chore|docs|style|refactor|test|perf|build|ci|revert"
-
-          # ----------------------------------------------------
-          # Allowed project scopes
-          # ----------------------------------------------------
-
-          SCOPES="server|web|LM"
-
-          # ----------------------------------------------------
-          # Final required format
-          # ----------------------------------------------------
-
-          PATTERN="^(${TYPES})\\((${SCOPES})\\): .+"
-
-          echo "Required format:"
-          echo ""
-          echo "  type(scope): description"
-          echo ""
-          echo "Allowed types:"
-          echo "  feat"
-          echo "  fix"
-          echo "  chore"
-          echo "  docs"
-          echo "  style"
-          echo "  refactor"
-          echo "  test"
-          echo "  perf"
-          echo "  build"
-          echo "  ci"
-          echo "  revert"
-          echo ""
-          echo "Allowed scopes:"
-          echo "  server  -> Backend"
-          echo "  web     -> Frontend"
-          echo "  LM      -> Machine Learning"
-          echo ""
-          echo "------------------------------------------"
-
-          # Get all commits belonging to this PR
-          COMMITS=$(git log \
-            --format="%H|%s" \
-            origin/${{ github.base_ref }}..HEAD)
-
-          FAILED=0
-
-          while IFS='|' read -r HASH MESSAGE
-          do
-
-            SHORT_HASH=${HASH:0:7}
-
-            echo ""
-            echo "Checking:"
-            echo "  $SHORT_HASH -> $MESSAGE"
-
-            if [[ "$MESSAGE" =~ $PATTERN ]]; then
-
-              echo "  ✓ VALID"
-
-            else
-
-              echo "  ✗ INVALID"
-              echo ""
-              echo "  Expected:"
-              echo "    type(scope): description"
-              echo ""
-              echo "  Examples:"
-              echo "    feat(server): add employee authentication"
-              echo "    fix(web): fix HR dashboard layout"
-              echo "    chore(LM): update model dependencies"
-              echo "    docs(server): update API documentation"
-
-              FAILED=1
-
-            fi
-
-          done <<< "$COMMITS"
+#       # --------------------------------------------------------
+#       # Checkout repository
+#       # --------------------------------------------------------
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
 
-          # ----------------------------------------------------
-          # Final Result
-          # ----------------------------------------------------
+#       # --------------------------------------------------------
+#       # Check every commit inside the Pull Request
+#       # --------------------------------------------------------
+#       - name: Validate commit messages
+#         shell: bash
+#         run: |
 
-          echo ""
-          echo "=========================================="
+#           echo "=========================================="
+#           echo " AppNexora Commit Message Validator"
+#           echo "=========================================="
+#           echo ""
 
-          if [ "$FAILED" -eq 1 ]; then
+#           # ----------------------------------------------------
+#           # Allowed commit types
+#           # ----------------------------------------------------
+#           #
+#           # feat     = New feature
+#           # fix      = Bug fix
+#           # chore    = Maintenance
+#           # docs     = Documentation
+#           # style    = Formatting
+#           # refactor = Code restructuring
+#           # test     = Tests
+#           # perf     = Performance improvement
+#           # build    = Build/dependency changes
+#           # ci       = CI/CD changes
+#           # revert   = Reverting previous changes
+#           #
+#           # ----------------------------------------------------
 
-            echo "❌ COMMIT MESSAGE CHECK FAILED"
-            echo ""
-            echo "One or more commits do not follow:"
-            echo ""
-            echo "  type(scope): description"
-            echo ""
-            echo "Fix the commit message and push again."
+#           TYPES="feat|fix|chore|docs|style|refactor|test|perf|build|ci|revert"
 
-            exit 1
+#           # ----------------------------------------------------
+#           # Allowed project scopes
+#           # ----------------------------------------------------
 
-          else
+#           SCOPES="server|web|LM"
 
-            echo "✅ ALL COMMIT MESSAGES ARE VALID"
+#           # ----------------------------------------------------
+#           # Final required format
+#           # ----------------------------------------------------
 
-          fi
+#           PATTERN="^(${TYPES})\\((${SCOPES})\\): .+"
 
-          echo "=========================================="
+#           echo "Required format:"
+#           echo ""
+#           echo "  type(scope): description"
+#           echo ""
+#           echo "Allowed types:"
+#           echo "  feat"
+#           echo "  fix"
+#           echo "  chore"
+#           echo "  docs"
+#           echo "  style"
+#           echo "  refactor"
+#           echo "  test"
+#           echo "  perf"
+#           echo "  build"
+#           echo "  ci"
+#           echo "  revert"
+#           echo ""
+#           echo "Allowed scopes:"
+#           echo "  server  -> Backend"
+#           echo "  web     -> Frontend"
+#           echo "  LM      -> Machine Learning"
+#           echo ""
+#           echo "------------------------------------------"
+
+#           # Get all commits belonging to this PR
+#           COMMITS=$(git log \
+#             --format="%H|%s" \
+#             origin/${{ github.base_ref }}..HEAD)
+
+#           FAILED=0
+
+#           while IFS='|' read -r HASH MESSAGE
+#           do
+
+#             SHORT_HASH=${HASH:0:7}
+
+#             echo ""
+#             echo "Checking:"
+#             echo "  $SHORT_HASH -> $MESSAGE"
+
+#             if [[ "$MESSAGE" =~ $PATTERN ]]; then
+
+#               echo "  ✓ VALID"
+
+#             else
+
+#               echo "  ✗ INVALID"
+#               echo ""
+#               echo "  Expected:"
+#               echo "    type(scope): description"
+#               echo ""
+#               echo "  Examples:"
+#               echo "    feat(server): add employee authentication"
+#               echo "    fix(web): fix HR dashboard layout"
+#               echo "    chore(LM): update model dependencies"
+#               echo "    docs(server): update API documentation"
+
+#               FAILED=1
+
+#             fi
+
+#           done <<< "$COMMITS"
+
+
+#           # ----------------------------------------------------
+#           # Final Result
+#           # ----------------------------------------------------
+
+#           echo ""
+#           echo "=========================================="
+
+#           if [ "$FAILED" -eq 1 ]; then
+
+#             echo "❌ COMMIT MESSAGE CHECK FAILED"
+#             echo ""
+#             echo "One or more commits do not follow:"
+#             echo ""
+#             echo "  type(scope): description"
+#             echo ""
+#             echo "Fix the commit message and push again."
+
+#             exit 1
+
+#           else
+
+#             echo "✅ ALL COMMIT MESSAGES ARE VALID"
+
+#           fi
+
+#           echo "=========================================="
