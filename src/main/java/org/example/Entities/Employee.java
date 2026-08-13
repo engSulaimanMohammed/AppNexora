@@ -20,3 +20,6 @@ public class Employee extends User {
             String email,
             String department,
             String position,
+            double leaveBalance,
+            double sickLeaveBalance) {
+
