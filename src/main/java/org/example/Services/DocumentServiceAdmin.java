@@ -12,4 +12,8 @@ public class DocumentServiceAdmin {
     public void addDocument(Document document) {
         documents.add(document);
     }
+
+    public List<Document> getAllDocuments() {
+        return new ArrayList<>(documents);
+    }
 }
