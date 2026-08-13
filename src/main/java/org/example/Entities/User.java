@@ -1,19 +1,19 @@
 package org.example.Entities;
 
 public class User {
-}
-
 
     private int id;
     private String username;
     private String password;
     private String role;
+    private String email;
 
-    public User(int id, String username, String password, String role) {
+    public User(int id, String username, String password, String role, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.email = email;
     }
 
     public int getId() {
@@ -46,5 +46,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

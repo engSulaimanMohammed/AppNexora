@@ -1,4 +1,4 @@
 package org.example.Interfaces;
 
-public interface , LeaveService {
+public interface LeaveService {
 }

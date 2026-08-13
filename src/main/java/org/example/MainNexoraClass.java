@@ -7,9 +7,9 @@ import org.example.Services.UserServiceImpl;
 
 import java.util.Scanner;
 
-public class Main {
+public class MainNexoraClass {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         UserService userService = new UserServiceImpl();
 
@@ -19,10 +19,16 @@ public class Main {
 
         User currentUser = null;
 
-        while (currentUser == null) {
-            IO.println("\n1. Sign In");
+        Boolean exitFlag = false;
+        while (!exitFlag) {
+            if (currentUser == null) {
+                IO.println("\n1. Sign In");
+            } else {
+                IO.println("Hi " + currentUser.getUsername());
+            }
             IO.println("2. Forgot Password");
             IO.println("3. Exit System");
+            IO.println("4. Role based menu");
             IO.print("Select an option: ");
 
             int option = readInt(scanner);
@@ -53,27 +59,34 @@ public class Main {
                 } else {
                     IO.println("❌ Username not found!");
                 }
+            } else if (option == 3) {
+                IO.println("Exiting the system");
+                exitFlag = true;
+                AuthService.logout();
+                scanner.close();
+                return;
+            } else if (option == 4) {
+
+                if (currentUser != null) {
+                    IO.println("\nWelcome, " + currentUser.getUsername() + " | Role: [" + currentUser.getRole() + "]");
+
+                    switch (currentUser.getRole().toUpperCase()) {
+                        case "ADMIN":
+                            IO.println("\n--- ADMIN PANEL ---");
+                            break;
+                        case "HR":
+                            IO.println("\n--- HR DASHBOARD ---");
+                            break;
+                        case "EMPLOYEE":
+                            IO.println("\n--- EMPLOYEE PORTAL ---");
+                            break;
+                    }
+                }
             } else {
                 IO.println("❌ Invalid option!");
             }
+
         }
-
-        IO.println("\nWelcome, " + currentUser.getUsername() + " | Role: [" + currentUser.getRole() + "]");
-
-        switch (currentUser.getRole().toUpperCase()) {
-            case "ADMIN":
-                IO.println("\n--- ADMIN PANEL ---");
-                break;
-            case "HR":
-                IO.println("\n--- HR DASHBOARD ---");
-                break;
-            case "EMPLOYEE":
-                IO.println("\n--- EMPLOYEE PORTAL ---");
-                break;
-        }
-
-        AuthService.logout();
-        scanner.close();
     }
 
     private static int readInt(Scanner scanner) {
