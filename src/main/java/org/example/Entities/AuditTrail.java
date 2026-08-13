@@ -14,4 +14,17 @@ public class AuditTrail {
         this.timestamp = LocalDateTime.now();
     }
 
+    public String getAction() {
+        return action;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+
 }
