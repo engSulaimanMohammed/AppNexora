@@ -20,3 +20,4 @@ public class WorkSchedule {
         this.scheduleId = scheduleId;
         this.employeeId = employeeId;
         this.startTime = startTime;
+        this.endTime = endTime;
