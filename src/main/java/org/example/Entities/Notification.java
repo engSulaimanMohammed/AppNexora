@@ -16,5 +16,25 @@ public class Notification {
         this.read = false;
     }
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void markAsRead() {
+        read = true;
+    }
+
 
 }
