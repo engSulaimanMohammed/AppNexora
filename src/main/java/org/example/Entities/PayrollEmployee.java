@@ -39,3 +39,7 @@ public class PayrollEmployee {
         return employeeId;
     }
 
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
