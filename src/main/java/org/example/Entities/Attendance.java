@@ -60,3 +60,11 @@ public class Attendance {
         this.checkIn = checkIn;
     }
 
+    public LocalTime getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(LocalTime checkOut) {
+        this.checkOut = checkOut;
+    }
+
