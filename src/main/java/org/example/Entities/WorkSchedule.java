@@ -32,3 +32,8 @@ public class WorkSchedule {
         this.scheduleId = scheduleId;
     }
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+   }
