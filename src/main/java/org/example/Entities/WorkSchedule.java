@@ -17,3 +17,4 @@ public class WorkSchedule {
             LocalTime endTime,
             int breakHours) {
 
+        this.scheduleId = scheduleId;
