@@ -5,3 +5,5 @@ import java.util.List;
 
         void save(T entity);
 
+        T findById(int id);
+
