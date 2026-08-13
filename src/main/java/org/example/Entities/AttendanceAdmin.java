@@ -7,4 +7,6 @@ public class AttendanceAdmin {
     private String status;
 
 
+    public AttendanceAdmin() {
+    }
 }
