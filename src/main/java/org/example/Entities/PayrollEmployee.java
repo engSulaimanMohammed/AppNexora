@@ -78,3 +78,7 @@ public class PayrollEmployee {
         calculateNetSalary();
     }
 
+    public double getNetSalary() {
+        return netSalary;
+    }
+
