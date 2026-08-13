@@ -2,51 +2,35 @@ package org.example.Entities;
 
 public class Payroll {
 
-    private Long id;
-    private Long employeeId;
-    private double basicSalary;
-    private double bonus;
-    private double deductions;
-    public Payroll() {
+    private final int employeeId;
+    private final double baseSalary;
+    private final double allowances;
+    private final double deductions;
+
+    public Payroll(int employeeId, double baseSalary, double allowances, double deductions) {
+        this.employeeId = employeeId;
+        this.baseSalary = baseSalary;
+        this.allowances = allowances;
+        this.deductions = deductions;
     }
 
-    public Long getId() {
-        return id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
+    public double getAllowances() {
+        return allowances;
     }
 
     public double getDeductions() {
         return deductions;
     }
 
-    public void setDeductions(double deductions) {
-        this.deductions = deductions;
-    }
-
-    public double getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(double bonus) {
-        this.bonus = bonus;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public double getBasicSalary() {
-        return basicSalary;
-    }
-
-    public void setBasicSalary(double basicSalary) {
-        this.basicSalary = basicSalary;
+    public double getNetSalary() {
+        return baseSalary + allowances - deductions;
     }
 }

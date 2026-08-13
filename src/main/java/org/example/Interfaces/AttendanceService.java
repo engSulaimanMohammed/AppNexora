@@ -1,13 +1,15 @@
 package org.example.Interfaces;
 
 import org.example.Entities.Attendance;
-import org.example.Entities.AttendanceAdmin;
+import org.example.Entities.AttendanceStatus;
 
-public interface AttendanceService implements AttendanceAdmin {
-    // Record clock-in time for an employee
-    void recordClockIn(Long employeeId);
+import java.util.List;
 
-    // Retrieve attendance status by employee ID
-    Attendance getAttendance(Long employeeId);
+public interface AttendanceService {
 
+    Attendance mark(int employeeId, AttendanceStatus status);
+
+    List<Attendance> findAll();
+
+    List<Attendance> findByEmployee(int employeeId);
 }

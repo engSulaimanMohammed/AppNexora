@@ -1,35 +1,34 @@
 package org.example.Entities;
 
+/**
+ * A system account used to sign in. EMPLOYEE accounts are linked to an
+ * {@link Employee} record through {@link #employeeId}; ADMIN and HR accounts
+ * leave it {@code null}.
+ */
 public class User {
 
-    private int id;
-    private String username;
+    private final int id;
+    private final String username;
     private String password;
-    private String role;
-    private String email;
+    private final String email;
+    private final Role role;
+    private final Integer employeeId;
 
-    public User(int id, String username, String password, String role, String email) {
+    public User(int id, String username, String password, String email, Role role, Integer employeeId) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
         this.email = email;
+        this.role = role;
+        this.employeeId = employeeId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -40,19 +39,15 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public Role getRole() {
+        return role;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 }

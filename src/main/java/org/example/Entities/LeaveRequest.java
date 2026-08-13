@@ -2,44 +2,41 @@ package org.example.Entities;
 
 public class LeaveRequest {
 
-    private Long id;
-    private Long employeeId;
-    private String leaveType;
-    private String status;
+    private final int id;
+    private final int employeeId;
+    private final String type;
+    private final int days;
+    private LeaveStatus status;
 
-    public Long getId() {
+    public LeaveRequest(int id, int employeeId, String type, int days) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.type = type;
+        this.days = days;
+        this.status = LeaveStatus.PENDING;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getLeaveType() {
-        return leaveType;
-    }
-
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
-    }
-
-    public Long getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public String getType() {
+        return type;
     }
 
-    public LeaveRequest() {
+    public int getDays() {
+        return days;
+    }
 
+    public LeaveStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(LeaveStatus status) {
+        this.status = status;
     }
 }
