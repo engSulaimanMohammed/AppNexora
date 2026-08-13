@@ -73,3 +73,8 @@ public class PayrollEmployee {
         return deductions;
     }
 
+    public void setDeductions(double deductions) {
+        this.deductions = deductions;
+        calculateNetSalary();
+    }
+
