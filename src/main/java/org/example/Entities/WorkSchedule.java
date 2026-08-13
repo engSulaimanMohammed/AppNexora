@@ -36,4 +36,7 @@ public class WorkSchedule {
         return employeeId;
     }
 
-   }
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
