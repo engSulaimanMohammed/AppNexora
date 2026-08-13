@@ -3,7 +3,7 @@ package org.example.Entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Attendance {
+public class AttendanceHR {
 
     private int attendanceId;
     private int employeeId;
@@ -15,7 +15,7 @@ public class Attendance {
     private String status;
     private boolean remote;
 
-    public Attendance(
+    public AttendanceHR(
             int attendanceId,
             int employeeId,
             LocalDate date,

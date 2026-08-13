@@ -1,4 +1,4 @@
 package org.example.Utils;
 
-public class InputUtils {
+public class PasswordUtil {
 }

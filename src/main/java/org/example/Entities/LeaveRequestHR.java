@@ -2,7 +2,7 @@ package org.example.Entities;
 
 import java.time.LocalDate;
 
-public class LeaveRequest {
+public class LeaveRequestHR {
 
     private int leaveId;
     private int employeeId;
@@ -15,7 +15,7 @@ public class LeaveRequest {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public LeaveRequest(
+    public LeaveRequestHR(
             int leaveId,
             int employeeId,
             String leaveType,

@@ -1,4 +1,4 @@
 package org.example.Utils;
 
-public class IO {
+public class Validation {
 }

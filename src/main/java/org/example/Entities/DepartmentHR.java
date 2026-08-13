@@ -1,13 +1,13 @@
 package org.example.Entities;
 
-public class Department {
+public class DepartmentHR {
 
     private int departmentId;
     private String departmentName;
     private String managerName;
     private String description;
 
-    public Department(
+    public DepartmentHR(
             int departmentId,
             String departmentName,
             String managerName,

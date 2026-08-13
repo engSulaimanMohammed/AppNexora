@@ -2,7 +2,7 @@ package org.example.Entities;
 
 import java.time.LocalDateTime;
 
-public class Notification {
+public class NotificationHR {
 
     private int notificationId;
     private String title;
@@ -13,7 +13,7 @@ public class Notification {
 
     private LocalDateTime createdAt;
 
-    public Notification(
+    public NotificationHR(
             int notificationId,
             String title,
             String message,

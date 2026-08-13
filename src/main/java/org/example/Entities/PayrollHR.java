@@ -2,7 +2,7 @@ package org.example.Entities;
 
 import java.time.LocalDate;
 
-public class Payroll {
+public class PayrollHR {
 
     private int payrollId;
     private int employeeId;
@@ -18,7 +18,7 @@ public class Payroll {
 
     private LocalDate paymentDate;
 
-    public Payroll(
+    public PayrollHR(
             int payrollId,
             int employeeId,
             String month,

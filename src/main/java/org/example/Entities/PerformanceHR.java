@@ -2,7 +2,7 @@ package org.example.Entities;
 
 import java.time.LocalDate;
 
-public class Performance {
+public class PerformanceHR {
 
     private int performanceId;
     private int employeeId;
@@ -14,7 +14,7 @@ public class Performance {
 
     private LocalDate evaluationDate;
 
-    public Performance(
+    public PerformanceHR(
             int performanceId,
             int employeeId,
             String period,
