@@ -25,3 +25,12 @@ public class Manager extends User {
         this.department = department;
     }
 
+    public String getManagerNumber() {
+        return managerNumber;
+    }
+
+    public void setManagerNumber(String managerNumber) {
+        this.managerNumber = managerNumber;
+    }
+
+   }
