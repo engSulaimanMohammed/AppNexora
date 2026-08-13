@@ -6,4 +6,7 @@ public class LeaveRequest {
     private Long employeeId;
     private String leaveType;
     private String status;
+
+    public LeaveRequest() {
+    }
 }
