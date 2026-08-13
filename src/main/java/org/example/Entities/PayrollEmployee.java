@@ -55,3 +55,8 @@ public class PayrollEmployee {
         return basicSalary;
     }
 
+    public void setBasicSalary(double basicSalary) {
+        this.basicSalary = basicSalary;
+        calculateNetSalary();
+    }
+
