@@ -10,5 +10,13 @@ public class Report {
         this.content = content;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
 
 }
