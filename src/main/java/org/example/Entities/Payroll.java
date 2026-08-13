@@ -7,5 +7,6 @@ public class Payroll {
     private double basicSalary;
     private double bonus;
     private double deductions;
-
+    public Payroll() {
+    }
 }
