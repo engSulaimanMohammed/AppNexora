@@ -1,4 +1,34 @@
 package org.example.Services;
 
-public class AttendanceServiceImpl {
+import org.example.Entities.Attendance;
+import org.example.Entities.AttendanceStatus;
+import org.example.Interfaces.AttendanceService;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AttendanceServiceImpl implements AttendanceService {
+
+    private final List<Attendance> records = new ArrayList<>();
+    private int nextId = 1;
+
+    @Override
+    public Attendance mark(int employeeId, AttendanceStatus status) {
+        Attendance record = new Attendance(nextId++, employeeId, LocalDate.now(), status);
+        records.add(record);
+        return record;
+    }
+
+    @Override
+    public List<Attendance> findAll() {
+        return List.copyOf(records);
+    }
+
+    @Override
+    public List<Attendance> findByEmployee(int employeeId) {
+        return records.stream()
+                .filter(r -> r.getEmployeeId() == employeeId)
+                .toList();
+    }
 }
