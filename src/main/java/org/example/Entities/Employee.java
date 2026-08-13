@@ -5,4 +5,5 @@ public class Employee extends User {
     private String employeeNumber;
     private String name;
     private String email;
-    }
+    private String department;
+   }
