@@ -16,7 +16,7 @@ public class ReportServiceAdmin {
     public Report generateEmployeeReport() {
 
         List<Employee> employees =
-                employeeService.getAllEmployees();
+                employeeService.getAllEmployee();
 
         StringBuilder content = new StringBuilder();
 
