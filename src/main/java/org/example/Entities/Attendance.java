@@ -5,3 +5,5 @@ import java.time.LocalTime;
 
 public class Attendance {
 
+    private int id;
+    private int employeeId;
