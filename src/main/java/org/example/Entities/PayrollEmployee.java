@@ -43,3 +43,7 @@ public class PayrollEmployee {
         this.employeeId = employeeId;
     }
 
+    public String getMonth() {
+        return month;
+    }
+
