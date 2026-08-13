@@ -10,3 +10,4 @@ public class Employee extends User {
     private double leaveBalance;
     private double sickLeaveBalance;
 
+    public Employee(
