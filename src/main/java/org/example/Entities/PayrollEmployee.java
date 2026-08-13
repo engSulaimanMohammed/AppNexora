@@ -82,3 +82,10 @@ public class PayrollEmployee {
         return netSalary;
     }
 
+    // Calculate the employee's final salary
+    private void calculateNetSalary() {
+
+        // Net Salary = Basic Salary + Allowances - Deductions
+        netSalary = basicSalary + allowances - deductions;
+    }
+}
