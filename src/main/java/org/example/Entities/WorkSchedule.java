@@ -60,3 +60,7 @@ public class WorkSchedule {
         return breakHours;
     }
 
+    public void setBreakHours(int breakHours) {
+        this.breakHours = breakHours;
+    }
+}
