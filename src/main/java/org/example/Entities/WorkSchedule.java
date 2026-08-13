@@ -18,3 +18,5 @@ public class WorkSchedule {
             int breakHours) {
 
         this.scheduleId = scheduleId;
+        this.employeeId = employeeId;
+        }
