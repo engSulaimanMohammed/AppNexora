@@ -33,4 +33,11 @@ public class Manager extends User {
         this.managerNumber = managerNumber;
     }
 
-   }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
