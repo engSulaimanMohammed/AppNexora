@@ -47,3 +47,8 @@ public class WorkSchedule {
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
