@@ -7,3 +7,5 @@ import java.util.List;
 
         T findById(int id);
 
+        List<T> findAll();
+
