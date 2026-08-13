@@ -24,3 +24,6 @@ public class PayrollEmployee {
         this.basicSalary = basicSalary;
         this.allowances = allowances;
         this.deductions = deductions;
+        this.netSalary = basicSalary + allowances - deductions;
+    }
+
