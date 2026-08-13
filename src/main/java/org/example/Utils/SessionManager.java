@@ -1,7 +1,5 @@
 package org.example.Utils;
 
-package com.hr.utils;
-
 import org.example.entities.User;
 
 // Utility class for managing the current user session

@@ -25,6 +25,19 @@ public class Attendance {
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+
+
+    public class Attendance {
+    private final int id;
+    private final int employeeId;
+    private final LocalDate date;
+    private final AttendanceStatus status;
+
+    public Attendance(int id, int employeeId, LocalDate date, AttendanceStatus status) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.date = date;
+
         this.status = status;
     }
 
@@ -76,3 +89,8 @@ public class Attendance {
         this.status = status;
     }
 }
+    public AttendanceStatus getStatus() {
+        return status;
+    }
+
+}}

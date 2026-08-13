@@ -1,8 +1,8 @@
 package org.example.Entities;
 
-public class Employee extends User {
+public class Employee {
 
-    private String employeeNumber;
+    private final int id;
     private String name;
     private String email;
     private String department;
@@ -26,6 +26,10 @@ public class Employee extends User {
         super(id, username, password, role);
 
         this.employeeNumber = employeeNumber;
+
+
+    public Employee(int id, String name, String email, String department, String position, double leaveBalance) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
@@ -40,6 +44,12 @@ public class Employee extends User {
 
     public void setEmployeeNumber(String employeeNumber) {
         this.employeeNumber = employeeNumber;
+
+    }
+
+    public int getId() {
+        return id;
+
     }
 
     public String getName() {
@@ -81,6 +91,7 @@ public class Employee extends User {
     public void setLeaveBalance(double leaveBalance) {
         this.leaveBalance = leaveBalance;
     }
+
 
     public double getSickLeaveBalance() {
         return sickLeaveBalance;
