@@ -62,5 +62,6 @@ public class WorkSchedule {
 
     public void setBreakHours(int breakHours) {
         this.breakHours = breakHours;
+        //done
     }
 }
