@@ -60,3 +60,7 @@ public class PayrollEmployee {
         calculateNetSalary();
     }
 
+    public double getAllowances() {
+        return allowances;
+    }
+
