@@ -52,3 +52,11 @@ public class WorkSchedule {
         return endTime;
     }
 
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getBreakHours() {
+        return breakHours;
+    }
+
