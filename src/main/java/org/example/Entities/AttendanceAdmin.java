@@ -1,11 +1,14 @@
 package org.example.Entities;
 
-public class LeaveRequest {
-
+public class AttendanceAdmin {
     private Long id;
     private Long employeeId;
-    private String leaveType;
+    private String date;
     private String status;
+
+
+    public AttendanceAdmin() {
+    }
 
     public Long getId() {
         return id;
@@ -23,12 +26,12 @@ public class LeaveRequest {
         this.status = status;
     }
 
-    public String getLeaveType() {
-        return leaveType;
+    public String getDate() {
+        return date;
     }
 
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Long getEmployeeId() {
@@ -37,9 +40,5 @@ public class LeaveRequest {
 
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public LeaveRequest() {
-
     }
 }
