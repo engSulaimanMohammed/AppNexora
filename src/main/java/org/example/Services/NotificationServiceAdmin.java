@@ -32,4 +32,9 @@ public class NotificationServiceAdmin {
         return result;
     }
 
+    public List<Notification> getAllNotifications() {
+        return new ArrayList<>(notifications);
+    }
 }
+
+
