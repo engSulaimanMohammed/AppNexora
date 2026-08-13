@@ -21,3 +21,5 @@ public class WorkSchedule {
         this.employeeId = employeeId;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.breakHours = breakHours;
+    }
