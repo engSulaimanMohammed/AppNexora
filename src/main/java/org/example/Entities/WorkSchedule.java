@@ -23,3 +23,8 @@ public class WorkSchedule {
         this.endTime = endTime;
         this.breakHours = breakHours;
     }
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
