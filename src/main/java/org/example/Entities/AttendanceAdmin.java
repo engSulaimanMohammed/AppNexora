@@ -1,6 +1,6 @@
 package org.example.Entities;
 
-public class AttendanceAdmin {
+public abstract class AttendanceAdmin {
     private Long id;
     private Long employeeId;
     private String date;
@@ -41,4 +41,8 @@ public class AttendanceAdmin {
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
+
+    public abstract void recordClockIn(Long employeeId);
+
+    public abstract Attendance getAttendance(Long employeeId);
 }
