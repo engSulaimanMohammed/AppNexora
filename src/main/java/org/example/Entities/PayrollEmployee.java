@@ -7,3 +7,4 @@ public class PayrollEmployee {
     private String month;
     private double basicSalary;
     private double allowances;
+    private double deductions;
