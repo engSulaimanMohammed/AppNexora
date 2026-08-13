@@ -82,3 +82,11 @@ public class Employee extends User {
         this.leaveBalance = leaveBalance;
     }
 
+    public double getSickLeaveBalance() {
+        return sickLeaveBalance;
+    }
+
+    public void setSickLeaveBalance(double sickLeaveBalance) {
+        this.sickLeaveBalance = sickLeaveBalance;
+    }
+}
