@@ -16,4 +16,20 @@ public class NotificationServiceAdmin {
                 new Notification(employeeId, message)
         );
     }
+
+    public List<Notification> getEmployeeNotifications(
+            int employeeId) {
+
+        List<Notification> result = new ArrayList<>();
+
+        for (Notification notification : notifications) {
+
+            if (notification.getEmployeeId() == employeeId) {
+                result.add(notification);
+            }
+        }
+
+        return result;
+    }
+
 }
