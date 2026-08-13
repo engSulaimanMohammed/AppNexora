@@ -9,4 +9,11 @@ public class NotificationServiceAdmin {
 
     private final List<Notification> notifications =
             new ArrayList<>();
+
+    public void sendNotification(int employeeId, String message) {
+
+        notifications.add(
+                new Notification(employeeId, message)
+        );
+    }
 }
