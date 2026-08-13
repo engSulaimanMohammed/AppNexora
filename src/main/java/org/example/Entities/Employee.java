@@ -1,13 +1,5 @@
 package org.example.Entities;
 
-public class Employee {
-    public String getName() {
-        return null;
-    }
-
-    public Object getId() {
-    }
-}
 
 public class Employee extends User {
 
@@ -17,4 +9,8 @@ public class Employee extends User {
     private String department;
     private String position;
     private double leaveBalance;
+
+    public Employee(int id, String username, String password, String role, String email) {
+        super(id, username, password, role, email);
     }
+}
