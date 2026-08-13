@@ -1,4 +1,6 @@
 package org.example.Entities;
 
-public class Attendance {
-}
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+p}
