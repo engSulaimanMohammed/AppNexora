@@ -19,4 +19,9 @@ public class Report {
     }
 
 
+    @Override
+    public String toString() {
+        return "===== " + title + " =====" +
+                content;
+    }
 }
