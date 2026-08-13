@@ -7,3 +7,7 @@ public class Attendance {
 
     private int id;
     private int employeeId;
+    private LocalDate date;
+    private LocalTime checkIn;
+    private LocalTime checkOut;
+    }
