@@ -22,34 +22,4 @@ public class PayrollEmployee {
         this.employeeId = employeeId;
         this.month = month;
         this.basicSalary = basicSalary;
-
-    public void setBasicSalary(double basicSalary) {
-        this.basicSalary = basicSalary;
-        calculateNetSalary();
-    }
-
-    public double getAllowances() {
-        return allowances;
-    }
-
-    public void setAllowances(double allowances) {
         this.allowances = allowances;
-        calculateNetSalary();
-    }
-
-    public double getDeductions() {
-        return deductions;
-    }
-
-    public void setDeductions(double deductions) {
-        this.deductions = deductions;
-        calculateNetSalary();
-    }
-
-    public double getNetSalary() {
-        return netSalary;
-    }
-
-    private void calculateNetSalary() {
-        netSalary = basicSalary + allowances - deductions;
-    }
