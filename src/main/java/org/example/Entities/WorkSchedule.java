@@ -40,3 +40,7 @@ public class WorkSchedule {
         this.employeeId = employeeId;
     }
 
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
