@@ -10,3 +10,10 @@ public class WorkSchedule {
     private LocalTime endTime;
     private int breakHours;
 
+    public WorkSchedule(
+            int scheduleId,
+            int employeeId,
+            LocalTime startTime,
+            LocalTime endTime,
+            int breakHours) {
+
