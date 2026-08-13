@@ -34,3 +34,11 @@ public class Employee extends User {
         this.sickLeaveBalance = sickLeaveBalance;
     }
 
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
