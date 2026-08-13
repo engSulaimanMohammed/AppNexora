@@ -7,3 +7,6 @@ public class Manager extends User {
     private String email;
     private String department;
 
+    public Manager(
+            int id,
+           }
