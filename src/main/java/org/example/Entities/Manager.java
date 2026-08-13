@@ -9,4 +9,12 @@ public class Manager extends User {
 
     public Manager(
             int id,
-           }
+            String username,
+            String password,
+            String role,
+            String managerNumber,
+            String name,
+            String email,
+            String department) {
+
+        super(id, username, password, role);
