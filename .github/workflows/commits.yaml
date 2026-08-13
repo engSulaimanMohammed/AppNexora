@@ -1,0 +1,54 @@
+name: Commit Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  commit-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check Commit Message
+        run: |
+          MESSAGE=$(git log -1 --pretty=%B)
+          echo "Commit message: $MESSAGE"
+          if [ ${#MESSAGE} -lt 5 ]; then
+            echo "Commit message is too short"
+            exit 1
+          fi
+
+      - name: Check Commit Size
+        run: |
+          CHANGES=$(git diff --shortstat HEAD~1 HEAD)
+          echo "$CHANGES"
+          LINES=$(git diff --numstat HEAD~1 HEAD | awk '{add += $1; del += $2} END {print add + del}')
+          echo "Total changed lines: $LINES"
+          if [ "$LINES" -gt 500 ]; then
+            echo "Commit is too large"
+            exit 1
+          fi
+
+      - name: Check Forbidden Files
+        run: |
+          FILES=$(git diff --name-only HEAD~1 HEAD)
+          echo "$FILES"
+          if echo "$FILES" | grep -Ei '(^|/)(\.env|node_modules|payroll|password|secret|api[-_]?key)'; then
+            echo "Forbidden or sensitive file detected"
+            exit 1
+          fi
+
+      - name: Check New Files
+        run: |
+          NEW_FILES=$(git diff --name-status HEAD~1 HEAD | grep '^A' || true)
+          echo "New files:"
+          echo "$NEW_FILES"
+
+      - name: Commit Check Passed
+        run: echo "Commit passed all checks"
