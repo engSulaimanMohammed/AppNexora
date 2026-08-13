@@ -47,3 +47,7 @@ public class PayrollEmployee {
         return month;
     }
 
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
