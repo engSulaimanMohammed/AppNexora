@@ -12,4 +12,5 @@ import java.util.List;
         void update(T entity);
 
         void delete(int id);
+        //done
     }
