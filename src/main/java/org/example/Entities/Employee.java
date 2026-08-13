@@ -1,5 +1,8 @@
 package org.example.Entities;
 
+public class Employee {
+}
+
 public class Employee extends User {
 
     private String employeeNumber;
