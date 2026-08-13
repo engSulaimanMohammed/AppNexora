@@ -1,24 +1,19 @@
 name: AppNexora Java CI
 
-# Run CI whenever code is pushed
-# or when a Pull Request is created/updated.
+# CI runs ONLY for Pull Requests targeting master
 on:
-  push:
-    branches:
-      - master
-      - Admin
-      - Admin2
-      - employee
-      - vv12
-
   pull_request:
     branches:
       - master
+    types:
+      - opened
+      - synchronize
+      - reopened
 
-# Prevent multiple CI runs for the same branch/PR.
-# If a new commit is pushed, the old CI run will be cancelled.
+# Cancel the previous run if new commits
+# are pushed to the same Pull Request
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 permissions:
@@ -34,12 +29,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Download repository code
-      - name: Checkout repository
+      - name: Checkout Pull Request
         uses: actions/checkout@v7
 
-      # Configure the same Java version used by pom.xml
       - name: Set up Java 26
         uses: actions/setup-java@v5
         with:
@@ -47,13 +39,11 @@ jobs:
           java-version: '26'
           cache: maven
 
-      # Print versions to make debugging easier
       - name: Show Java and Maven versions
         run: |
           java -version
           mvn -version
 
-      # Clean old build files and compile source code
       - name: Compile project
         run: mvn --batch-mode --no-transfer-progress clean compile
 
@@ -67,8 +57,7 @@ jobs:
     needs: compile
 
     steps:
-
-      - name: Checkout repository
+      - name: Checkout Pull Request
         uses: actions/checkout@v7
 
       - name: Set up Java 26
@@ -78,17 +67,12 @@ jobs:
           java-version: '26'
           cache: maven
 
-      # Maven automatically looks inside:
-      #
-      # src/test/java
-      #
-      # When JUnit tests are added later, they will run here.
       - name: Run tests
         run: mvn --batch-mode --no-transfer-progress test
 
 
   # =========================================================
-  # 3. PACKAGE / BUILD VALIDATION
+  # 3. BUILD VALIDATION
   # =========================================================
   build:
     name: Build Application
@@ -96,8 +80,7 @@ jobs:
     needs: test
 
     steps:
-
-      - name: Checkout repository
+      - name: Checkout Pull Request
         uses: actions/checkout@v7
 
       - name: Set up Java 26
@@ -107,28 +90,12 @@ jobs:
           java-version: '26'
           cache: maven
 
-      # Verify performs compilation, tests and Maven validation.
       - name: Verify Maven project
         run: mvn --batch-mode --no-transfer-progress verify
 
-      # Show generated files
-      - name: Show build output
-        if: success()
-        run: |
-          echo "================================"
-          echo "AppNexora CI PASSED"
-          echo "================================"
-
-          if [ -d "target" ]; then
-            echo "Generated target files:"
-            ls -lah target/
-          else
-            echo "No target directory generated."
-          fi
-
 
   # =========================================================
-  # 4. FINAL CI STATUS
+  # 4. FINAL STATUS
   # =========================================================
   ci-success:
     name: AppNexora CI Passed
@@ -139,15 +106,14 @@ jobs:
       - build
 
     steps:
-
       - name: CI Success
         run: |
           echo "=========================================="
-          echo "✅ APPNEXORA CONTINUOUS INTEGRATION PASSED"
+          echo "APPNEXORA CONTINUOUS INTEGRATION PASSED"
           echo "=========================================="
           echo ""
-          echo "✓ Java compilation passed"
+          echo "✓ Compilation passed"
           echo "✓ Unit tests passed"
-          echo "✓ Maven build passed"
+          echo "✓ Maven verification passed"
           echo ""
-          echo "The code is safe to merge."
+          echo "Pull Request is ready for review."
