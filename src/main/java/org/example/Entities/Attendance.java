@@ -52,3 +52,11 @@ public class Attendance {
         this.date = date;
     }
 
+    public LocalTime getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(LocalTime checkIn) {
+        this.checkIn = checkIn;
+    }
+
