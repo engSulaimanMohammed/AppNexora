@@ -24,6 +24,18 @@ public class ReportServiceAdmin {
                 .append(employees.size())
                 .append("\n\n");
 
+        for (Employee employee : employees) {
+            content.append(employee)
+                    .append("\n");
+        }
+
+        return new Report(
+                "Employee Report",
+                content.toString()
+        );
+    }
+}
+
 
 
 
