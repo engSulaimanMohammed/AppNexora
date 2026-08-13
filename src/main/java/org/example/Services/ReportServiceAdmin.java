@@ -18,4 +18,12 @@ public class ReportServiceAdmin {
         List<Employee> employees =
                 employeeService.getAllEmployees();
 
-    }
+        StringBuilder content = new StringBuilder();
+
+        content.append("Total Employees: ")
+                .append(employees.size())
+                .append("\n\n");
+
+
+
+
