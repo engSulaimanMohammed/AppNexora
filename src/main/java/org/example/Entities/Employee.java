@@ -7,4 +7,5 @@ public class Employee extends User {
     private String email;
     private String department;
     private String position;
+    private double leaveBalance;
     }
