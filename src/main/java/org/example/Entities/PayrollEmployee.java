@@ -10,3 +10,11 @@ public class PayrollEmployee {
     private double deductions;
     private double netSalary;
 
+    public PayrollEmployee(
+            int payrollId,
+            int employeeId,
+            String month,
+            double basicSalary,
+            double allowances,
+            double deductions) {
+
