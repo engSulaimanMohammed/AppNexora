@@ -7,3 +7,15 @@ public class Department {
     private String managerName;
     private String location;
 
+    public Department(
+            int departmentId,
+            String departmentName,
+            String managerName,
+            String location) {
+
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.managerName = managerName;
+        this.location = location;
+    }
+
