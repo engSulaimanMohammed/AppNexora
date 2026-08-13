@@ -49,3 +49,11 @@ public class Manager extends User {
         this.email = email;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+}
