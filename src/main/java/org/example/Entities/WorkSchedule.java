@@ -28,3 +28,7 @@ public class WorkSchedule {
         return scheduleId;
     }
 
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
