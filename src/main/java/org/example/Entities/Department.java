@@ -35,3 +35,12 @@ public class Department {
         this.departmentName = departmentName;
     }
 
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+
+    }
+
