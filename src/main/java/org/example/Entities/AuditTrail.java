@@ -27,4 +27,10 @@ public class AuditTrail {
     }
 
 
+    @Override
+    public String toString() {
+        return "[" + timestamp + "] " +
+                username + " -> " + action;
+    }
 }
+
