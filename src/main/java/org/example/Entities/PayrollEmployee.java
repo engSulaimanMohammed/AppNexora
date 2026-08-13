@@ -51,3 +51,7 @@ public class PayrollEmployee {
         this.month = month;
     }
 
+    public double getBasicSalary() {
+        return basicSalary;
+    }
+
