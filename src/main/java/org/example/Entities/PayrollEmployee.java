@@ -35,3 +35,7 @@ public class PayrollEmployee {
         this.payrollId = payrollId;
     }
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
