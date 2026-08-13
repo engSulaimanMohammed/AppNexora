@@ -66,6 +66,7 @@ public class PayrollEmployee {
 
     public void setAllowances(double allowances) {
         this.allowances = allowances;
+
         calculateNetSalary();
     }
 
