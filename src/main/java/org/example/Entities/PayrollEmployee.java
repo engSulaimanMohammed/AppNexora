@@ -4,3 +4,4 @@ public class PayrollEmployee {
 
     private int payrollId;
     private int employeeId;
+    private String month;
