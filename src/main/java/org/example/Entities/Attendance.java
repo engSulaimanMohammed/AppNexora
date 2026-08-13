@@ -44,4 +44,11 @@ public class Attendance {
         this.employeeId = employeeId;
     }
 
-   }
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
