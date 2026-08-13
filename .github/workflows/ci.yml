@@ -1,0 +1,119 @@
+name: AppNexora Java CI
+
+# CI runs ONLY for Pull Requests targeting master
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+# Cancel the previous run if new commits
+# are pushed to the same Pull Request
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+
+  # =========================================================
+  # 1. COMPILE CHECK
+  # =========================================================
+  compile:
+    name: Compile Java Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Pull Request
+        uses: actions/checkout@v7
+
+      - name: Set up Java 26
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '26'
+          cache: maven
+
+      - name: Show Java and Maven versions
+        run: |
+          java -version
+          mvn -version
+
+      - name: Compile project
+        run: mvn --batch-mode --no-transfer-progress clean compile
+
+
+  # =========================================================
+  # 2. UNIT TESTS
+  # =========================================================
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    needs: compile
+
+    steps:
+      - name: Checkout Pull Request
+        uses: actions/checkout@v7
+
+      - name: Set up Java 26
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '26'
+          cache: maven
+
+      - name: Run tests
+        run: mvn --batch-mode --no-transfer-progress test
+
+
+  # =========================================================
+  # 3. BUILD VALIDATION
+  # =========================================================
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout Pull Request
+        uses: actions/checkout@v7
+
+      - name: Set up Java 26
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '26'
+          cache: maven
+
+      - name: Verify Maven project
+        run: mvn --batch-mode --no-transfer-progress verify
+
+
+  # =========================================================
+  # 4. FINAL STATUS
+  # =========================================================
+  ci-success:
+    name: AppNexora CI Passed
+    runs-on: ubuntu-latest
+    needs:
+      - compile
+      - test
+      - build
+
+    steps:
+      - name: CI Success
+        run: |
+          echo "=========================================="
+          echo "APPNEXORA CONTINUOUS INTEGRATION PASSED"
+          echo "=========================================="
+          echo ""
+          echo "✓ Compilation passed"
+          echo "✓ Unit tests passed"
+          echo "✓ Maven verification passed"
+          echo ""
+          echo "Pull Request is ready for review."
