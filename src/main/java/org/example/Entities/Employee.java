@@ -74,3 +74,11 @@ public class Employee extends User {
         this.position = position;
     }
 
+    public double getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public void setLeaveBalance(double leaveBalance) {
+        this.leaveBalance = leaveBalance;
+    }
+
