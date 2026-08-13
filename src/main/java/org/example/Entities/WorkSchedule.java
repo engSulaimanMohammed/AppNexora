@@ -1,4 +1,5 @@
 package org.example.Entities;
 
-public class WorkSchedule {
+import java.time.LocalTime;
+
 }
