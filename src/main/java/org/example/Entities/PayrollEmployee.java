@@ -8,3 +8,5 @@ public class PayrollEmployee {
     private double basicSalary;
     private double allowances;
     private double deductions;
+    private double netSalary;
+
