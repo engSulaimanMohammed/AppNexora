@@ -37,4 +37,12 @@ public class Notification {
     }
 
 
+    @Override
+    public String toString() {
+        return "Employee ID: " + employeeId +
+                ", Message: " + message +
+                ", Created: " + createdAt +
+                ", Read: " + read;
+    }
 }
+
