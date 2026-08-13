@@ -1,6 +1,7 @@
 package org.example.Entities;
 
 public class Document {
+<<<<<<< HEAD
 
     private int id;
     private int employeeId;
@@ -45,3 +46,6 @@ public class Document {
 
 
 
+=======
+}
+>>>>>>> f754052f1d7ff7330952c503a2c4bcfe9a87cf47

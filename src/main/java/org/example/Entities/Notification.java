@@ -1,5 +1,6 @@
 package org.example.Entities;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 
 public class Notification {
@@ -46,3 +47,7 @@ public class Notification {
     }
 }
 
+=======
+public class Notification {
+}
+>>>>>>> f754052f1d7ff7330952c503a2c4bcfe9a87cf47
