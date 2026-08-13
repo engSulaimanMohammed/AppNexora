@@ -9,3 +9,6 @@ import java.util.List;
 
         List<T> findAll();
 
+        void update(T entity);
+
+        v
