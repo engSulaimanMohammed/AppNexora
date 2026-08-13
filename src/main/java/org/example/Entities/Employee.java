@@ -25,3 +25,12 @@ public class Employee extends User {
 
         super(id, username, password, role);
 
+        this.employeeNumber = employeeNumber;
+        this.name = name;
+        this.email = email;
+        this.department = department;
+        this.position = position;
+        this.leaveBalance = leaveBalance;
+        this.sickLeaveBalance = sickLeaveBalance;
+    }
+
