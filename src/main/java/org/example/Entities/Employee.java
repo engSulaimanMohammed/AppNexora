@@ -8,4 +8,5 @@ public class Employee extends User {
     private String department;
     private String position;
     private double leaveBalance;
-    }
+    private double sickLeaveBalance;
+
