@@ -12,3 +12,11 @@ public class Employee extends User {
 
     public Employee(
             int id,
+            String username,
+            String password,
+            String role,
+            String employeeNumber,
+            String name,
+            String email,
+            String department,
+            String position,
