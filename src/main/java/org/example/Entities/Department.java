@@ -41,6 +41,13 @@ public class Department {
 
     public void setManagerName(String managerName) {
         this.managerName = managerName;
-
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+}
