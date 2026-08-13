@@ -23,3 +23,4 @@ public class PayrollEmployee {
         this.month = month;
         this.basicSalary = basicSalary;
         this.allowances = allowances;
+        this.deductions = deductions;
