@@ -23,3 +23,5 @@ public class Employee extends User {
             double leaveBalance,
             double sickLeaveBalance) {
 
+        super(id, username, password, role);
+
