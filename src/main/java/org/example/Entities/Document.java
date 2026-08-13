@@ -34,5 +34,14 @@ public class Document {
     }
 
 
+    @Override
+    public String toString() {
+        return "Document ID: " + id +
+                ", Employee ID: " + employeeId +
+                ", Name: " + name +
+                ", Type: " + type;
+    }
 }
+
+
 
