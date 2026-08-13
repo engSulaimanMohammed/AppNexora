@@ -11,4 +11,5 @@ import java.util.List;
 
         void update(T entity);
 
-        v
+        void delete(int id);
+    }
