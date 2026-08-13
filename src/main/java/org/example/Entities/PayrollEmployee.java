@@ -20,3 +20,4 @@ public class PayrollEmployee {
 
         this.payrollId = payrollId;
         this.employeeId = employeeId;
+        this.month = month;
