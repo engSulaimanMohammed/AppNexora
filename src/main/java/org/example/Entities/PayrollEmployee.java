@@ -27,3 +27,7 @@ public class PayrollEmployee {
         this.netSalary = basicSalary + allowances - deductions;
     }
 
+    public int getPayrollId() {
+        return payrollId;
+    }
+
