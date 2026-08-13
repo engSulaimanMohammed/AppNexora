@@ -4,19 +4,10 @@ import org.example.Entities.Attendance;
 import org.example.Entities.AttendanceAdmin;
 
 public interface AttendanceService implements AttendanceAdmin {
-    default void recordClockIn() {
-        recordClockIn(null);
-    }
+    // Record clock-in time for an employee
+    void recordClockIn(Long employeeId);
 
-    @Override
-    public void recordClockIn(Long employeeId) {
-        // Implementation goes here.
-    }
-
-    @Override
-    public Attendance getAttendance(Long employeeId) {
-        // Implementation goes here.
-        return null;
-    }
+    // Retrieve attendance status by employee ID
+    Attendance getAttendance(Long employeeId);
 
 }

@@ -1,6 +1,12 @@
 package org.example.Entities;
 
 public class Employee {
+    public String getName() {
+        return null;
+    }
+
+    public Object getId() {
+    }
 }
 
 public class Employee extends User {
