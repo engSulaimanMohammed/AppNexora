@@ -18,3 +18,10 @@ public class Manager extends User {
             String department) {
 
         super(id, username, password, role);
+
+        this.managerNumber = managerNumber;
+        this.name = name;
+        this.email = email;
+        this.department = department;
+    }
+
