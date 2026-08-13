@@ -66,7 +66,10 @@ public class PayrollEmployee {
 
     public void setAllowances(double allowances) {
         this.allowances = allowances;
-
         calculateNetSalary();
+    }
+
+    public double getDeductions() {
+        return deductions;
     }
 
