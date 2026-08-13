@@ -8,3 +8,5 @@ public class WorkSchedule {
     private int employeeId;
     private LocalTime startTime;
     private LocalTime endTime;
+    private int breakHours;
+
