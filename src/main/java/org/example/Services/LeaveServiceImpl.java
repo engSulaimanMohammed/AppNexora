@@ -47,23 +47,59 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
     @Override
-    public boolean decide(int requestId, boolean approve) {
-        Optional<LeaveRequest> match = requests.stream()
-                .filter(r -> r.getId() == requestId && r.getStatus() == LeaveStatus.PENDING)
-                .findFirst();
+    public boolean decide(
+            int requestId,
+            boolean approve,
+            String reason) {
+
+        Optional<LeaveRequest> match =
+                requests.stream()
+                        .filter(r ->
+                                r.getId() == requestId
+                                        &&
+                                        r.getStatus() == LeaveStatus.PENDING
+                        )
+                        .findFirst();
 
         if (match.isEmpty()) {
             return false;
         }
 
         LeaveRequest request = match.get();
+
         if (approve) {
-            request.setStatus(LeaveStatus.APPROVED);
-            employeeService.findById(request.getEmployeeId())
-                    .ifPresent(e -> e.setLeaveBalance(e.getLeaveBalance() - request.getDays()));
+
+            request.setStatus(
+                    LeaveStatus.APPROVED
+            );
+
+            employeeService
+                    .findById(
+                            request.getEmployeeId()
+                    )
+                    .ifPresent(employee ->
+                            employee.setLeaveBalance(
+                                    employee.getLeaveBalance()
+                                            - request.getDays()
+                            )
+                    );
+
         } else {
-            request.setStatus(LeaveStatus.REJECTED);
+
+            if (reason == null ||
+                    reason.trim().isEmpty()) {
+
+                return false;
+            }
+
+            request.setRejectionReason(
+                    reason.trim()
+            );
+
+            request.setStatus(
+                    LeaveStatus.REJECTED
+            );
         }
+
         return true;
-    }
-}
+    }}

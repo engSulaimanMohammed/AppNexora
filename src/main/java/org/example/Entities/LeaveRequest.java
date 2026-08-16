@@ -7,6 +7,7 @@ public class LeaveRequest {
     private final String type;
     private final int days;
     private LeaveStatus status;
+    private String rejectionReason;
 
     public LeaveRequest(int id, int employeeId, String type, int days) {
         this.id = id;
@@ -14,6 +15,7 @@ public class LeaveRequest {
         this.type = type;
         this.days = days;
         this.status = LeaveStatus.PENDING;
+        this.rejectionReason = "";
     }
 
     public int getId() {
@@ -38,5 +40,13 @@ public class LeaveRequest {
 
     public void setStatus(LeaveStatus status) {
         this.status = status;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
     }
 }

@@ -311,6 +311,68 @@ public class Main {
         }
     }
 
+    private void requestLeave(Employee me) {
+
+        String type;
+
+        while (true) {
+
+            type = console.readLine(
+                    "Leave type (Annual / Sick / Emergency): "
+            ).trim();
+
+            if (type.equalsIgnoreCase("Annual")
+                    || type.equalsIgnoreCase("Sick")
+                    || type.equalsIgnoreCase("Emergency")) {
+
+                break;
+            }
+
+            System.out.println(
+                    "Invalid leave type. Please choose Annual, Sick, or Emergency."
+            );
+        }
+
+        int days =
+                console.readInt(
+                        "Number of days: "
+                );
+
+        if (days <= 0) {
+
+            System.out.println(
+                    "Number of leave days must be greater than zero."
+            );
+
+            return;
+        }
+
+        if (days > me.getLeaveBalance()) {
+
+            System.out.println(
+                    "Requested days exceed your available leave balance of "
+                            + me.getLeaveBalance()
+                            + " day(s)."
+            );
+
+            return;
+        }
+
+        LeaveRequest request =
+                leaveService.submit(
+                        me.getId(),
+                        type,
+                        days
+                );
+
+        System.out.println(
+                "Leave request #"
+                        + request.getId()
+                        + " submitted successfully. Status: "
+                        + request.getStatus()
+        );
+    }
+
     // =========================================================
     // RESET PASSWORD
     // =========================================================
@@ -701,7 +763,11 @@ public class Main {
 
         if (decision.equalsIgnoreCase("a")) {
 
-            if (leaveService.decide(id, true)) {
+            if (leaveService.decide(
+                    id,
+                    true,
+                    ""
+            )) {
 
                 System.out.println(
                         "Request approved."
@@ -719,12 +785,37 @@ public class Main {
         } else if (
                 decision.equalsIgnoreCase("r")) {
 
+            String reason;
+
+            while (true) {
+
+                reason =
+                        console.readLine(
+                                "Enter rejection reason: "
+                        ).trim();
+
+                if (!reason.isEmpty()) {
+                    break;
+                }
+
+                System.out.println(
+                        "Rejection reason cannot be empty."
+                );
+            }
+
             if (leaveService.decide(
                     id,
-                    false)) {
+                    false,
+                    reason
+            )) {
 
                 System.out.println(
                         "Request rejected."
+                );
+
+                System.out.println(
+                        "Reason: "
+                                + reason
                 );
 
             } else {
@@ -744,54 +835,6 @@ public class Main {
         }
     }
 
-    private void requestLeave(Employee me) {
-
-        String type =
-                console.readLine(
-                        "Leave type (e.g. Annual, Sick): "
-                );
-
-        int days =
-                console.readInt(
-                        "Number of days: "
-                );
-
-        if (days <= 0) {
-
-            System.out.println(
-                    "Days must be greater than zero."
-            );
-
-            return;
-        }
-
-        if (days > me.getLeaveBalance()) {
-
-            System.out.println(
-                    "Requested days exceed your balance of "
-                            + me.getLeaveBalance()
-                            + "."
-            );
-
-            return;
-        }
-
-        LeaveRequest request =
-                leaveService.submit(
-                        me.getId(),
-                        type,
-                        days
-                );
-
-        System.out.println(
-                "Leave request #"
-                        + request.getId()
-                        + " submitted (status: "
-                        + request.getStatus()
-                        + ")."
-        );
-    }
-
     // =========================================================
     // ATTENDANCE
     // =========================================================
@@ -802,6 +845,7 @@ public class Main {
                 console.readInt(
                         "Employee ID: "
                 );
+
 
         if (employeeService
                 .findById(employeeId)
@@ -816,36 +860,71 @@ public class Main {
             return;
         }
 
+
         System.out.println(
-                "Status: 1. Present  2. Absent  3. Late"
-        );
-
-        AttendanceStatus status =
-                switch (console.readInt(
-                        "Select status: ")) {
-
-                    case 2 ->
-                            AttendanceStatus.ABSENT;
-
-                    case 3 ->
-                            AttendanceStatus.LATE;
-
-                    default ->
-                            AttendanceStatus.PRESENT;
-                };
-
-        attendanceService.mark(
-                employeeId,
-                status
+                "1. Present"
         );
 
         System.out.println(
-                "Attendance recorded as "
-                        + status
-                        + "."
+                "2. Absent"
         );
+
+        System.out.println(
+                "3. Late"
+        );
+
+
+        int choice =
+                console.readInt(
+                        "Select status: "
+                );
+
+
+        AttendanceStatus status;
+
+
+        switch (choice) {
+
+            case 1 ->
+                    status = AttendanceStatus.PRESENT;
+
+            case 2 ->
+                    status = AttendanceStatus.ABSENT;
+
+            case 3 ->
+                    status = AttendanceStatus.LATE;
+
+            default -> {
+
+                System.out.println(
+                        "Invalid attendance status."
+                );
+
+                return;
+            }
+        }
+
+
+        try {
+
+            attendanceService.mark(
+                    employeeId,
+                    status
+            );
+
+            System.out.println(
+                    "Attendance recorded as "
+                            + status
+                            + "."
+            );
+
+        } catch (IllegalStateException e) {
+
+            System.out.println(
+                    e.getMessage()
+            );
+        }
     }
-
     // =========================================================
     // PROFILE
     // =========================================================
@@ -921,8 +1000,7 @@ public class Main {
     // PRINT ATTENDANCE
     // =========================================================
 
-    private void printAttendance(
-            List<Attendance> records) {
+    private void printAttendance(List<Attendance> records) {
 
         if (records.isEmpty()) {
 
@@ -934,19 +1012,27 @@ public class Main {
         }
 
         System.out.printf(
-                "%-4s %-8s %-12s %-8s%n",
+                "%-4s %-8s %-20s %-12s %-10s%n",
                 "ID",
-                "Emp",
+                "Emp ID",
+                "Employee Name",
                 "Date",
                 "Status"
         );
 
         for (Attendance a : records) {
 
+            String employeeName =
+                    employeeService
+                            .findById(a.getEmployeeId())
+                            .map(Employee::getName)
+                            .orElse("Unknown");
+
             System.out.printf(
-                    "%-4d %-8d %-12s %-8s%n",
+                    "%-4d %-8d %-20s %-12s %-10s%n",
                     a.getId(),
                     a.getEmployeeId(),
+                    employeeName,
                     a.getDate(),
                     a.getStatus()
             );

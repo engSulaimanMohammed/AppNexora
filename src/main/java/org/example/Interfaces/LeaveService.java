@@ -19,5 +19,5 @@ public interface LeaveService {
      * from the employee's leave balance. Returns {@code false} when the request
      * does not exist or is no longer pending.
      */
-    boolean decide(int requestId, boolean approve);
+    boolean decide(int requestId, boolean approve, String reason);
 }
