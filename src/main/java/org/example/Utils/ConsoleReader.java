@@ -1,26 +1,56 @@
 package org.example.Utils;
 
+import java.io.Console;
 import java.util.Scanner;
 
-/** Thin wrapper around {@link Scanner} that keeps the menu code readable. */
 public class ConsoleReader implements AutoCloseable {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public String readLine(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine().trim();
+    public ConsoleReader() {
+        scanner = new Scanner(System.in);
     }
 
-    public int readInt(String prompt) {
+    public String readLine(String message) {
+        System.out.print(message);
+        return scanner.nextLine();
+    }
+
+    public int readInt(String message) {
+
         while (true) {
-            String input = readLine(prompt);
+
+            System.out.print(message);
+            String input = scanner.nextLine();
+
             try {
                 return Integer.parseInt(input);
+
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
             }
         }
+    }
+
+    public String readPassword(String message) {
+
+        Console systemConsole = System.console();
+
+        if (systemConsole != null) {
+
+            char[] password =
+                    systemConsole.readPassword(message);
+
+            if (password == null) {
+                return "";
+            }
+
+            return new String(password);
+        }
+
+        // IntelliJ Run Console does not support hidden input.
+        System.out.print(message);
+        return scanner.nextLine();
     }
 
     @Override

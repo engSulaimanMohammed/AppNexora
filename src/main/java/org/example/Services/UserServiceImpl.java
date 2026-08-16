@@ -15,11 +15,11 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl() {
         // Seed accounts. EMPLOYEE accounts map to the employees seeded in EmployeeServiceImpl.
-        users.add(new User(nextId++, "admin@Appnwxora.com", "Admin@123", "admin@nexora.com", Role.ADMIN, null));
-        users.add(new User(nextId++, "hr@Appnwxora.com", "Hremployee@123", "hr@nexora.com", Role.HR, null));
-        users.add(new User(nextId++, "sara@Appnwxora.com", "Sara@123", "sara@nexora.com", Role.EMPLOYEE, 1));
+        users.add(new User(nextId++, "admin@Appnwxora.com", "Admin@123", "admin@Appnwxora.com", Role.ADMIN, null));
+        users.add(new User(nextId++, "hr@Appnwxora.com", "Hremployee@123", "hr@Appnwxora.com", Role.HR, null));
+        users.add(new User(nextId++, "sara@Appnwxora.com", "Sara@123", "sara@Appnwxora.com", Role.EMPLOYEE, 1));
         users.add(new User(nextId++, "ahmed@Appnwxora.com", "Ahmed@123", "ahmed@nexora.com", Role.EMPLOYEE, 2));
-        users.add(new User(nextId++, "khaled@Appnwxora.com", "Khaled@123", "khaled@nexora.com", Role.EMPLOYEE, 3));
+        users.add(new User(nextId++, "khaled@Appnwxora.com", "Khaled@123", "khaled@Appnwxora.com", Role.EMPLOYEE, 3));
     }
 
     @Override
