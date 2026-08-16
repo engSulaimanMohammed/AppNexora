@@ -200,6 +200,7 @@ public class Main {
     private void employeeDashboard() {
         User user = auth.getCurrentUser();
         Employee me = requireLinkedEmployee(user);
+
         if (me == null) {
             logout();
             return;
@@ -211,15 +212,28 @@ public class Main {
         System.out.println("3. My leave requests");
         System.out.println("4. My attendance");
         System.out.println("5. My payslip");
-        System.out.println("6. Logout");
+        System.out.println("6. Reset password");
+        System.out.println("7. Logout");
 
         switch (console.readInt("Select an option: ")) {
             case 1 -> printProfile(me);
+
             case 2 -> requestLeave(me);
-            case 3 -> printLeaveRequests(leaveService.findByEmployee(me.getId()));
-            case 4 -> printAttendance(attendanceService.findByEmployee(me.getId()));
+
+            case 3 -> printLeaveRequests(
+                    leaveService.findByEmployee(me.getId())
+            );
+
+            case 4 -> printAttendance(
+                    attendanceService.findByEmployee(me.getId())
+            );
+
             case 5 -> printPayslip(me);
-            case 6 -> logout();
+
+            case 6 -> userService.resetPassword(user);
+
+            case 7 -> logout();
+
             default -> System.out.println("Invalid option.");
         }
     }

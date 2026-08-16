@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
                 .orElse(false);
     }
 
+    @Override
+    public void resetPassword(User user) {
+
+    }
+
     private Optional<User> findByUsername(String username) {
         return users.stream()
                 .filter(u -> u.getUsername().equalsIgnoreCase(username))
