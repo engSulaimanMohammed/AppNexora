@@ -164,7 +164,7 @@ public class Main {
         System.out.println("1. List employees");
         System.out.println("2. Add employee");
         System.out.println("3. Remove employee");
-        System.out.println("4. View all leave requests");
+        System.out.println("4. Review leave requests");
         System.out.println("5. View attendance log");
         System.out.println("6. Logout");
 
@@ -172,7 +172,7 @@ public class Main {
             case 1 -> listEmployees();
             case 2 -> addEmployee();
             case 3 -> removeEmployee();
-            case 4 -> printLeaveRequests(leaveService.findAll());
+            case 4 -> reviewLeaveRequests();
             case 5 -> printAttendance(attendanceService.findAll());
             case 6 -> logout();
             default -> System.out.println("Invalid option.");
@@ -259,24 +259,42 @@ public class Main {
     }
 
     private void reviewLeaveRequests() {
+
         List<LeaveRequest> pending = leaveService.findPending();
+
         if (pending.isEmpty()) {
             System.out.println("No pending leave requests.");
             return;
         }
 
         printLeaveRequests(pending);
+
         int id = console.readInt("Request ID to review (0 to cancel): ");
+
         if (id == 0) {
             return;
         }
 
         String decision = console.readLine("Approve or reject? (a/r): ");
-        boolean approve = decision.equalsIgnoreCase("a");
-        if (leaveService.decide(id, approve)) {
-            System.out.println("Request " + (approve ? "approved." : "rejected."));
+
+        if (decision.equalsIgnoreCase("a")) {
+
+            if (leaveService.decide(id, true)) {
+                System.out.println("Request approved.");
+            } else {
+                System.out.println("Request " + id + " is not pending.");
+            }
+
+        } else if (decision.equalsIgnoreCase("r")) {
+
+            if (leaveService.decide(id, false)) {
+                System.out.println("Request rejected.");
+            } else {
+                System.out.println("Request " + id + " is not pending.");
+            }
+
         } else {
-            System.out.println("Request " + id + " is not pending.");
+            System.out.println("Invalid choice. Please enter a or r.");
         }
     }
 
