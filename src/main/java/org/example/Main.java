@@ -205,6 +205,15 @@ public class Main {
         String newPassword =
                 console.readPassword("New password: ");
 
+        String validationError =
+                validatePassword(newPassword);
+
+        if (validationError != null) {
+
+            System.out.println(validationError);
+            return;
+        }
+
         if (userService.resetPassword(
                 username,
                 newPassword)) {
@@ -220,7 +229,6 @@ public class Main {
             );
         }
     }
-
     // =========================================================
     // DASHBOARDS
     // =========================================================
@@ -458,8 +466,8 @@ public class Main {
         );
 
         System.out.println("1. List employees");
-        System.out.println("2. Add employee");
-        System.out.println("3. Remove employee");
+        System.out.println("2. Activate account");
+        System.out.println("3. Deactivate account");
         System.out.println("4. Review leave requests");
         System.out.println("5. View attendance log");
         System.out.println("6. Logout");
