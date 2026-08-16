@@ -14,34 +14,102 @@ public class UserServiceImpl implements UserService {
     private int nextId = 1;
 
     public UserServiceImpl() {
-        // Seed accounts. EMPLOYEE accounts map to the employees seeded in EmployeeServiceImpl.
-        users.add(new User(nextId++, "admin@Appnwxora.com", "Admin@123", "admin@Appnwxora.com", Role.ADMIN, null));
-        users.add(new User(nextId++, "hr@Appnwxora.com", "Hremployee@123", "hr@Appnwxora.com", Role.HR, null));
-        users.add(new User(nextId++, "sara@Appnwxora.com", "Sara@123", "sara@Appnwxora.com", Role.EMPLOYEE, 1));
-        users.add(new User(nextId++, "ahmed@Appnwxora.com", "Ahmed@123", "ahmed@nexora.com", Role.EMPLOYEE, 2));
-        users.add(new User(nextId++, "khaled@Appnwxora.com", "Khaled@123", "khaled@Appnwxora.com", Role.EMPLOYEE, 3));
+
+        users.add(new User(
+                nextId++,
+                "admin",
+                "Admin@123",
+                "admin@Appnwxora.com",
+                Role.ADMIN,
+                null
+        ));
+
+        users.add(new User(
+                nextId++,
+                "hr",
+                "Hremployee@123",
+                "hr@Appnwxora.com",
+                Role.HR,
+                null
+        ));
+
+        users.add(new User(
+                nextId++,
+                "sara",
+                "Sara@123",
+                "sara@Appnwxora.com",
+                Role.EMPLOYEE,
+                1
+        ));
+
+        users.add(new User(
+                nextId++,
+                "ahmed",
+                "Ahmed@123",
+                "ahmed@Appnwxora.com",
+                Role.EMPLOYEE,
+                2
+        ));
+
+        users.add(new User(
+                nextId++,
+                "khaled",
+                "Khaled@123",
+                "khaled@Appnwxora.com",
+                Role.EMPLOYEE,
+                3
+        ));
     }
 
     @Override
-    public User authenticate(String username, String password) {
+    public User authenticate(
+            String username,
+            String password) {
+
         return findByUsername(username)
-                .filter(u -> u.getPassword().equals(password))
+                .filter(user ->
+                        user.getPassword()
+                                .equals(password)
+                )
                 .orElse(null);
     }
 
     @Override
-    public boolean resetPassword(String username, String newPassword) {
+    public boolean resetPassword(
+            String username,
+            String newPassword) {
+
         return findByUsername(username)
                 .map(user -> {
+
                     user.setPassword(newPassword);
+
                     return true;
                 })
                 .orElse(false);
     }
 
-    private Optional<User> findByUsername(String username) {
+    @Override
+    public boolean emailExists(String email) {
+
         return users.stream()
-                .filter(u -> u.getUsername().equalsIgnoreCase(username))
+                .anyMatch(user ->
+                        user.getUsername()
+                                .equalsIgnoreCase(email)
+                                ||
+                                user.getEmail()
+                                        .equalsIgnoreCase(email)
+                );
+    }
+
+    private Optional<User> findByUsername(
+            String username) {
+
+        return users.stream()
+                .filter(user ->
+                        user.getUsername()
+                                .equalsIgnoreCase(username)
+                )
                 .findFirst();
     }
 }

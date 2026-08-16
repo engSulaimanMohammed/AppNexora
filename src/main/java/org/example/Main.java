@@ -96,12 +96,12 @@ public class Main {
     private void signIn() {
 
         String username =
-                console.readLine("Email: ");
+                console.readLine("Username: ");
 
         if (username == null ||
                 username.trim().isEmpty()) {
 
-            System.out.println("Email cannot be empty.");
+            System.out.println("Username cannot be empty.");
             return;
         }
 
@@ -146,7 +146,7 @@ public class Main {
         } else {
 
             System.out.println(
-                    "Invalid email or password."
+                    "Invalid Username or password."
             );
         }
     }
@@ -526,18 +526,19 @@ public class Main {
     private void addEmployee() {
 
         String name;
-        String email;
 
-        // Check duplicate name
         while (true) {
 
             name = console.readLine("Name: ").trim();
 
             boolean duplicateName = false;
 
-            for (Employee oldEmployee : employeeService.findAll()) {
+            for (Employee employee :
+                    employeeService.findAll()) {
 
-                if (oldEmployee.getName().equalsIgnoreCase(name)) {
+                if (employee.getName()
+                        .equalsIgnoreCase(name)) {
+
                     duplicateName = true;
                     break;
                 }
@@ -546,7 +547,7 @@ public class Main {
             if (duplicateName) {
 
                 System.out.println(
-                        "This employee name already exists."
+                        "Error: Employee name already exists."
                 );
 
                 continue;
@@ -555,49 +556,75 @@ public class Main {
             break;
         }
 
-        // Check email
+
+        String email;
+
         while (true) {
 
             email = console.readLine("Email: ").trim();
 
-            // Check company domain
-            if (!email.toLowerCase().endsWith("@appnwxora.com")
-                    || email.length() <= "@appnwxora.com".length()) {
+
+            // Only Appnwxora email
+            if (!email.toLowerCase()
+                    .endsWith("@appnwxora.com")
+                    ||
+                    email.length()
+                            <= "@appnwxora.com".length()) {
 
                 System.out.println(
-                        "Invalid email. Email must end with @Appnwxora.com"
+                        "Error: Email must end with @Appnwxora.com"
                 );
 
                 continue;
             }
 
-            boolean duplicateEmail = false;
 
-            for (Employee oldEmployee : employeeService.findAll()) {
+            // Check User accounts
+            if (userService.emailExists(email)) {
 
-                if (oldEmployee.getEmail().equalsIgnoreCase(email)) {
-                    duplicateEmail = true;
+                System.out.println(
+                        "Error: This email already exists."
+                );
+
+                continue;
+            }
+
+
+            // Check Employee list
+            boolean duplicateEmployeeEmail = false;
+
+            for (Employee employee :
+                    employeeService.findAll()) {
+
+                if (employee.getEmail()
+                        .equalsIgnoreCase(email)) {
+
+                    duplicateEmployeeEmail = true;
                     break;
                 }
             }
 
-            if (duplicateEmail) {
+
+            if (duplicateEmployeeEmail) {
 
                 System.out.println(
-                        "This email already exists."
+                        "Error: This email already exists."
                 );
 
                 continue;
             }
 
+
             break;
         }
+
 
         String department =
                 console.readLine("Department: ");
 
         String position =
                 console.readLine("Position: ");
+
 
         Employee employee =
                 employeeService.add(
@@ -607,12 +634,14 @@ public class Main {
                         position
                 );
 
+
         System.out.println(
                 "Employee added with ID "
                         + employee.getId()
                         + "."
         );
     }
+
     private void removeEmployee() {
 
         int id =
