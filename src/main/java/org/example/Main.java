@@ -64,7 +64,9 @@ public class Main {
 
     // ------------------------------------------------------------------ login
 
-    /** Returns {@code false} when the user chooses to exit the application. */
+    /**
+     * Returns {@code false} when the user chooses to exit the application.
+     */
     private boolean showLoginMenu() {
         System.out.println();
         System.out.println("1. Sign In");
@@ -83,29 +85,69 @@ public class Main {
     }
 
     private void signIn() {
-        String username = console.readLine("Username: ");
+        String username = console.readLine("Email: ");
         String password = console.readLine("Password: ");
 
+        String passwordError = validatePassword(password);
+
+        if (passwordError != null) {
+            System.out.println(passwordError);
+            return;
+        }
+
         User user = userService.authenticate(username, password);
+
         if (user != null) {
             auth.login(user);
-            System.out.println("Login successful. Welcome, " + user.getUsername()
-                    + " [" + user.getRole() + "]");
+            System.out.println("Login successful. Welcome, "
+                    + user.getUsername() + " [" + user.getRole() + "]");
         } else {
             System.out.println("Invalid username or password.");
         }
+    }
+
+    private String validatePassword(String password) {
+
+        StringBuilder missing = new StringBuilder();
+
+        if (password.length() < 8) {
+            missing.append("• At least 8 characters\n");
+        }
+
+        if (!password.matches(".*[a-z].*")) {
+            missing.append("• Lowercase letter (a-z)\n");
+        }
+
+        if (!password.matches(".*[A-Z].*")) {
+            missing.append("• Uppercase letter (A-Z)\n");
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            missing.append("• Number (0-9)\n");
+        }
+
+        if (!password.matches(".*[@#$%^&+=!].*")) {
+            missing.append("• Special character (@#$%^&+=!)\n");
+        }
+
+        if (!missing.isEmpty()) {
+            return "Password does not meet the requirements:\n" + missing;
+        }
+
+        return null;
     }
 
     private void forgotPassword() {
         String username = console.readLine("Username: ");
         String newPassword = console.readLine("New password: ");
 
+
         if (userService.resetPassword(username, newPassword)) {
             System.out.println("Password updated. You can now sign in.");
-        } else {
+        } else
             System.out.println("Username not found.");
         }
-    }
+
 
     // -------------------------------------------------------------- dashboards
 
