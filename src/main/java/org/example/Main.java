@@ -202,6 +202,11 @@ public class Main {
         String username =
                 console.readLine("Username: ");
 
+        if (username == null || username.trim().isEmpty()) {
+            System.out.println("Username cannot be empty.");
+            return;
+        }
+
         String newPassword =
                 console.readPassword("New password: ");
 
@@ -209,25 +214,21 @@ public class Main {
                 validatePassword(newPassword);
 
         if (validationError != null) {
-
             System.out.println(validationError);
             return;
         }
 
-        if (userService.resetPassword(
+        if (!userService.resetPassword(
                 username,
                 newPassword)) {
 
-            System.out.println(
-                    "Password updated. You can now sign in."
-            );
-
-        } else {
-
-            System.out.println(
-                    "Username not found."
-            );
+            System.out.println("Username not found.");
+            return;
         }
+
+        System.out.println(
+                "Password updated. You can now sign in."
+        );
     }
     // =========================================================
     // DASHBOARDS
