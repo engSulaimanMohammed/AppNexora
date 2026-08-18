@@ -8,6 +8,25 @@ public class Employee {
     private String department;
     private String position;
     private double leaveBalance;
+    private double sickLeaveBalance;
+
+    public Employee(
+            int id,
+            String username,
+            String password,
+            String role,
+            String employeeNumber,
+            String name,
+            String email,
+            String department,
+            String position,
+            double leaveBalance,
+            double sickLeaveBalance) {
+
+        super(id, username, password, role);
+
+        this.employeeNumber = employeeNumber;
+
 
     public Employee(int id, String name, String email, String department, String position, double leaveBalance) {
         this.id = id;
@@ -16,10 +35,21 @@ public class Employee {
         this.department = department;
         this.position = position;
         this.leaveBalance = leaveBalance;
+        this.sickLeaveBalance = sickLeaveBalance;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
+
     }
 
     public int getId() {
         return id;
+
     }
 
     public String getName() {
@@ -60,5 +90,14 @@ public class Employee {
 
     public void setLeaveBalance(double leaveBalance) {
         this.leaveBalance = leaveBalance;
+    }
+
+
+    public double getSickLeaveBalance() {
+        return sickLeaveBalance;
+    }
+
+    public void setSickLeaveBalance(double sickLeaveBalance) {
+        this.sickLeaveBalance = sickLeaveBalance;
     }
 }
